@@ -33,7 +33,6 @@ const MenuScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>KnitHut</Text>
       <Image source={ShopImage} style={styles.image} />
       {options.map((option) => (
         <IconButton

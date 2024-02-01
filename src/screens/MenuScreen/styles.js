@@ -7,10 +7,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 30,
-    color: "#fff",
-  },
   image: {
     width: 250,
     height: 250,
