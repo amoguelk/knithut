@@ -1,12 +1,12 @@
 import { View, Image, Text } from "react-native";
-import IconButton from "../../components/IconButton";
+import IconButton from "@app/components/IconButton";
 import { styles } from "./styles";
 
-const ShopImage = require("../../assets/img/shop.png");
-const PatternsIcon = require("../../assets/img/patterns.png");
-const WipIcon = require("../../assets/img/WIP.png");
-const ShoppingIcon = require("../../assets/img/shopping.png");
-const SettingsIcon = require("../../assets/img/settings.png");
+const HutLogo = require("@app/assets/img/hut.png");
+const PatternsIcon = require("@app/assets/img/patterns.png");
+const WipIcon = require("@app/assets/img/WIP.png");
+const ShoppingIcon = require("@app/assets/img/shopping.png");
+const SettingsIcon = require("@app/assets/img/settings.png");
 
 const MenuScreen = ({ navigation }) => {
   const options = [
@@ -33,7 +33,7 @@ const MenuScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={ShopImage} style={styles.image} />
+      <Image source={HutLogo} style={styles.image} />
       {options.map((option) => (
         <IconButton
           key={option.id}
