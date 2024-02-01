@@ -1,10 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MenuScreen from "./src/screens/MenuScreen";
-import PatternsScreen from "./src/screens/PatternsScreen";
-import WipScreen from "./src/screens/WipScreen";
-import ListScreen from "./src/screens/ListScreen";
-import SettingsScreen from "./src/screens/SettingsScreen";
+import MenuScreen from "@app/screens/MenuScreen";
+import PatternsScreen from "@app/screens/PatternsScreen";
+import WipScreen from "@app/screens/WipScreen";
+import ListScreen from "@app/screens/ListScreen";
+import SettingsScreen from "@app/screens/SettingsScreen";
 
 const Stack = createNativeStackNavigator();
 
