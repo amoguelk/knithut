@@ -1,7 +1,11 @@
 import { View, Pressable, Text, Image } from "react-native";
-import { styles } from "./styles";
+import { getStyles } from "./styles";
+import { useTheme } from "@react-navigation/native";
 
 const IconButton = ({ icon, label, onPress = () => {} }) => {
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
+
   return (
     <View>
       <Pressable style={styles.button} onPress={onPress}>
