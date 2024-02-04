@@ -8,9 +8,20 @@ export const getStyles = (colors) =>
       alignItems: "center",
       justifyContent: "center",
     },
-    image: {
-      width: 250,
-      height: 250,
-      borderRadius: 18,
+    logo: {
+      width: 350,
+      height: 350,
+      position: "absolute",
     },
+    navContainer: {
+      width: "100%",
+      height: 400,
+    },
+    icon: (i) => ({
+      position: "absolute",
+      left: i % 2 === 0 ? 10 : null,
+      right: i % 2 !== 0 ? 10 : null,
+      top: i < 2 ? 0 : null,
+      bottom: i >= 2 ? 0 : null,
+    }),
   });
