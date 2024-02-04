@@ -32,7 +32,7 @@ const Navigator = () => {
           name='menu'
           component={MenuScreen}
           options={{
-            title: "KnitHut",
+            title: "Knit Hut",
             headerTitleStyle: { fontWeight: "bold", fontSize: 30 },
           }}
         />

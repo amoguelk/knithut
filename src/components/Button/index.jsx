@@ -6,15 +6,13 @@ const Button = ({ label, onPress = () => {} }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
   return (
-    <View style={styles.buttonContainer}>
-      <Pressable
-        style={styles.button}
-        onPress={onPress}
-        android_ripple={{ color: colors.border }}
-      >
-        <Text style={styles.buttonLabel}>{label}</Text>
-      </Pressable>
-    </View>
+    <Pressable
+      style={styles.button}
+      onPress={onPress}
+      android_ripple={{ color: colors.border }}
+    >
+      <Text style={styles.buttonLabel}>{label}</Text>
+    </Pressable>
   );
 };
 
