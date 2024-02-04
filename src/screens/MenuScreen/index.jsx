@@ -1,6 +1,7 @@
 import { View, Image, Text } from "react-native";
 import IconButton from "@app/components/IconButton";
-import { styles } from "./styles";
+import { getStyles } from "./styles";
+import { useTheme } from "@react-navigation/native";
 
 const HutLogo = require("@app/assets/img/hut.png");
 const PatternsIcon = require("@app/assets/img/patterns.png");
@@ -9,6 +10,8 @@ const ShoppingIcon = require("@app/assets/img/shopping.png");
 const SettingsIcon = require("@app/assets/img/settings.png");
 
 const MenuScreen = ({ navigation }) => {
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
   const options = [
     {
       id: "pattern_icon",
