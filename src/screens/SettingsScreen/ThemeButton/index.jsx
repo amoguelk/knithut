@@ -2,7 +2,7 @@ import { AppContext } from "AppContextProvider";
 import { useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { KHDarkTheme, KHLightTheme } from "@app/_constants/theme";
-import Button from "@app/components/Button";
+import Button from "@app/components/buttons/Button";
 
 const ThemeButton = () => {
   const { theme, setTheme } = useContext(AppContext);
