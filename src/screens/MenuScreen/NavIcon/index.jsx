@@ -2,7 +2,7 @@ import { View, Pressable, Text, Image } from "react-native";
 import { getStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
 
-const IconButton = ({ icon, label, style = {}, onPress = () => {} }) => {
+const NavIcon = ({ icon, label, style = {}, onPress = () => {} }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
 
@@ -16,4 +16,4 @@ const IconButton = ({ icon, label, style = {}, onPress = () => {} }) => {
   );
 };
 
-export default IconButton;
+export default NavIcon;

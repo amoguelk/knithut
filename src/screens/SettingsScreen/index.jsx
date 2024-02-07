@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import Button from "@app/components/Button";
+import Button from "@app/components/buttons/Button";
 import ThemeButton from "./ThemeButton";
 
 const SettingsScreen = () => {

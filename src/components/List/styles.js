@@ -2,10 +2,15 @@ import { StyleSheet } from "react-native";
 
 export const getStyles = (colors) =>
   StyleSheet.create({
-    listContainer: {
+    container: {
       borderRadius: 10,
       flex: 1,
-      backgroundColor: colors.border,
+      backgroundColor: colors.card,
       padding: 20,
+    },
+    emptyText: {
+      fontSize: 16,
+      color: colors.cardMidContrast,
+      textAlign: "center",
     },
   });

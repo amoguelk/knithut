@@ -1,8 +1,9 @@
 import { View, Image } from "react-native";
-import IconButton from "@app/components/IconButton";
+import IconButton from "@app/components/buttons/IconButton";
 import { getStyles } from "./styles";
 import { useTheme } from "@react-navigation/native";
-import Button from "@app/components/Button";
+import Button from "@app/components/buttons/Button";
+import NavIcon from "./NavIcon";
 
 const HutLogo = require("@app/assets/img/hut.png");
 const PatternsIcon = require("@app/assets/img/patterns.png");
@@ -40,7 +41,7 @@ const MenuScreen = ({ navigation }) => {
       <Image source={HutLogo} style={styles.logo} />
       <View style={styles.navContainer}>
         {options.map((option, i) => (
-          <IconButton
+          <NavIcon
             key={option.id}
             icon={option.icon}
             label={option.label}
