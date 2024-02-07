@@ -10,6 +10,7 @@ export const KHLightTheme = {
     border: "#483737",
     card: "#fff",
     cardContrast: "#1e1e1e",
+    cardMidContrast: "#5a5a5a",
   },
 };
 
@@ -23,5 +24,6 @@ export const KHDarkTheme = {
     border: "#6c5353",
     card: "#1e1e1e",
     cardContrast: "#fff",
+    cardMidContrast: "#a9a9a9",
   },
 };

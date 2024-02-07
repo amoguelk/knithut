@@ -5,16 +5,14 @@ import { useTheme } from "@react-navigation/native";
 import { getStyles } from "./styles";
 import List from "@app/components/List";
 import Button from "@app/components/buttons/Button";
+import CreateItem from "./CreateItem";
 
 const ListScreen = () => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
 
-  const [items, setItems] = useState([
-    { id: 1, checked: false, text: "Item 1" },
-    { id: 2, checked: false, text: "Item 2", details: "Further details" },
-    { id: 3, checked: false, text: "Item 3" },
-  ]);
+  const [items, setItems] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const loadItems = async () => {
@@ -40,23 +38,30 @@ const ListScreen = () => {
     saveItems();
   }, [items]);
 
-  const addDummyItem = () => {
-    const num = items.length + 1;
-    setItems((prev) => [
-      ...prev,
-      { id: num, checked: false, text: `Item ${num}` },
-    ]);
-  };
-
   const setItemChecked = (index) => {
     const itemsCopy = [...items];
     itemsCopy[index].checked = !itemsCopy[index].checked;
     setItems(itemsCopy);
   };
 
-  const onItemDelete = (id) => {
-    const itemsCopy = items.filter((item) => item.id != id);
+  const onItemDelete = (index) => {
+    const itemsCopy = [...items];
+    itemsCopy.splice(index, 1);
     setItems(itemsCopy);
+  };
+
+  const handleModalClose = (reason, title, details) => {
+    setModalVisible(false);
+    if (reason === "add") {
+      setItems((prev) => [
+        ...prev,
+        {
+          checked: false,
+          text: title,
+          details: details === "" ? null : details,
+        },
+      ]);
+    }
   };
 
   return (
@@ -66,8 +71,10 @@ const ListScreen = () => {
         items={items}
         setItemChecked={setItemChecked}
         onItemDelete={onItemDelete}
+        emptyText='Your shopping list is empty'
       />
-      <Button label='Add item' onPress={addDummyItem} />
+      <Button label='Add item' onPress={() => setModalVisible(true)} />
+      <CreateItem isVisible={modalVisible} onClose={handleModalClose} />
     </View>
   );
 };

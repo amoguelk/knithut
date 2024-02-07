@@ -8,4 +8,9 @@ export const getStyles = (colors) =>
       backgroundColor: colors.card,
       padding: 20,
     },
+    emptyText: {
+      fontSize: 16,
+      color: colors.cardMidContrast,
+      textAlign: "center",
+    },
   });
