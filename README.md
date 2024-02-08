@@ -7,7 +7,7 @@ A mobile app to help you keep track of your knitting and crocheting projects, bo
 - [ ] Manage current projects
 
 ## To-Do
-- [ ] Linting
+- [x] Linting
 - [ ] Documentation
 - [ ] Screen transitions
 - [ ] Accessibility 
