@@ -1,20 +1,20 @@
-import Button from "@app/components/buttons/Button";
-import { useTheme } from "@react-navigation/native";
-import { Modal, Platform, View, Text, TextInput } from "react-native";
-import { getStyles } from "./style";
-import { useState } from "react";
+import React, { useState } from 'react';
+import Button from 'components/buttons/Button';
+import { useTheme } from '@react-navigation/native';
+import { Modal, View, Text, TextInput } from 'react-native';
+import { getStyles } from './style';
 
 const CreateItem = ({ isVisible, onClose }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
 
-  const [title, setTitle] = useState("");
-  const [details, setDetails] = useState("");
+  const [title, setTitle] = useState('');
+  const [details, setDetails] = useState('');
 
-  handleClose = (reason) => {
+  const handleClose = (reason) => {
     onClose(reason, title, details);
-    setTitle("");
-    setDetails("");
+    setTitle('');
+    setDetails('');
   };
 
   return (
@@ -45,14 +45,14 @@ const CreateItem = ({ isVisible, onClose }) => {
           <View style={styles.actions}>
             <Button
               label='Cancel'
-              onPress={() => handleClose("cancel")}
+              onPress={() => handleClose('cancel')}
               containerStyle={styles.actionButton}
             />
             <Button
               label='Add'
-              onPress={() => handleClose("add")}
+              onPress={() => handleClose('add')}
               containerStyle={styles.actionButton}
-              disabled={title === ""}
+              disabled={title === ''}
             />
           </View>
         </View>

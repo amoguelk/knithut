@@ -1,11 +1,10 @@
-import { Text, View } from "react-native";
+import React from 'react';
+import { Text, View } from 'react-native';
 
-const WipScreen = () => {
-  return (
-    <View>
-      <Text>Wip</Text>
-    </View>
-  );
-};
+const WipScreen = () => (
+  <View>
+    <Text>Wip</Text>
+  </View>
+);
 
 export default WipScreen;

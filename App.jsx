@@ -1,13 +1,12 @@
+import React from 'react';
 // Navigation
-import Navigator from "@app/navigation/Navigator";
+import Navigator from './src/navigation/Navigator';
 // Context
-import AppContextProvider from "AppContextProvider";
+import AppContextProvider from './src/_utils/AppContextProvider';
 
-const App = () => {
-  return (
-    <AppContextProvider>
-      <Navigator />
-    </AppContextProvider>
-  );
-};
+const App = () => (
+  <AppContextProvider>
+    <Navigator />
+  </AppContextProvider>
+);
 export default App;

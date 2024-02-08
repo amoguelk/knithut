@@ -1,15 +1,15 @@
+import React, { useContext } from 'react';
 // Navigation
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Screens
-import MenuScreen from "@app/screens/MenuScreen";
-import PatternsScreen from "@app/screens/PatternsScreen";
-import WipScreen from "@app/screens/WipScreen";
-import ListScreen from "@app/screens/ListScreen";
-import SettingsScreen from "@app/screens/SettingsScreen";
+import MenuScreen from 'screens/MenuScreen';
+import PatternsScreen from 'screens/PatternsScreen';
+import WipScreen from 'screens/WipScreen';
+import ListScreen from 'screens/ListScreen';
+import SettingsScreen from 'screens/SettingsScreen';
 // Context
-import { useContext } from "react";
-import { AppContext } from "AppContextProvider";
+import { AppContext } from '_utils/AppContextProvider';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +23,7 @@ const Navigator = () => {
             backgroundColor: theme.colors.background,
           },
           headerTintColor: theme.colors.text,
-          headerTitleAlign: "center",
+          headerTitleAlign: 'center',
           headerShadowVisible: false,
           headerBackTitleVisible: false,
         }}
@@ -32,29 +32,29 @@ const Navigator = () => {
           name='menu'
           component={MenuScreen}
           options={{
-            title: "Knit Hut",
-            headerTitleStyle: { fontWeight: "bold", fontSize: 30 },
+            title: 'Knit Hut',
+            headerTitleStyle: { fontWeight: 'bold', fontSize: 30 },
           }}
         />
         <Stack.Screen
           name='patterns'
           component={PatternsScreen}
-          options={{ title: "Saved Patterns" }}
+          options={{ title: 'Saved Patterns' }}
         />
         <Stack.Screen
           name='wips'
           component={WipScreen}
-          options={{ title: "Works in Progress" }}
+          options={{ title: 'Works in Progress' }}
         />
         <Stack.Screen
           name='list'
           component={ListScreen}
-          options={{ title: "Shopping List" }}
+          options={{ title: 'Shopping List' }}
         />
         <Stack.Screen
           name='settings'
           component={SettingsScreen}
-          options={{ title: "Settings" }}
+          options={{ title: 'Settings' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

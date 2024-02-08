@@ -1,10 +1,11 @@
-import { Text, View } from "react-native";
-import Checkbox from "expo-checkbox";
-import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
-import { useTheme } from "@react-navigation/native";
-import { getStyles } from "./styles";
-import IconButton from "@app/components/buttons/IconButton";
-import createConfirmAlert from "@app/components/alerts/ConfirmAlert";
+import React from 'react';
+import { Text, View } from 'react-native';
+import Checkbox from 'expo-checkbox';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { useTheme } from '@react-navigation/native';
+import IconButton from 'components/buttons/IconButton';
+import createConfirmAlert from 'components/alerts/ConfirmAlert';
+import { getStyles } from './styles';
 
 const ListItem = ({
   text,
@@ -38,9 +39,9 @@ const ListItem = ({
         rippleColor={colors.cardContrast}
         onPress={() =>
           createConfirmAlert({
-            title: "Delete item?",
+            title: 'Delete item?',
             message: `Delete item "${text}"?`,
-            confirmText: "Delete",
+            confirmText: 'Delete',
             confirmAction: onDelete,
           })
         }
