@@ -27,10 +27,11 @@ const AppContextProvider = ({ children }) => {
     getScheme();
   }, []);
 
-  const themeContext = useMemo(() => ({ theme, setTheme }), []);
-
   return (
-    <AppContext.Provider value={themeContext}>{children}</AppContext.Provider>
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <AppContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 
