@@ -1,38 +1,37 @@
-import { View, Image } from "react-native";
-import IconButton from "@app/components/buttons/IconButton";
-import { getStyles } from "./styles";
-import { useTheme } from "@react-navigation/native";
-import Button from "@app/components/buttons/Button";
-import NavIcon from "./NavIcon";
+import React from 'react';
+import { View, Image } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import NavIcon from './NavIcon';
+import { getStyles } from './styles';
 
-const HutLogo = require("@app/assets/img/hut.png");
-const PatternsIcon = require("@app/assets/img/patterns.png");
-const WipIcon = require("@app/assets/img/WIP.png");
-const ShoppingIcon = require("@app/assets/img/shopping.png");
-const SettingsIcon = require("@app/assets/img/settings.png");
+const HutLogo = require('assets/img/hut.png');
+const PatternsIcon = require('assets/img/patterns.png');
+const WipIcon = require('assets/img/WIP.png');
+const ShoppingIcon = require('assets/img/shopping.png');
+const SettingsIcon = require('assets/img/settings.png');
 
 const MenuScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
   const options = [
     {
-      id: "pattern_icon",
+      id: 'pattern_icon',
       icon: PatternsIcon,
-      label: "Patterns",
-      nav_name: "patterns",
+      label: 'Patterns',
+      nav_name: 'patterns',
     },
-    { id: "wip_icon", icon: WipIcon, label: "WIPs", nav_name: "wips" },
+    { id: 'wip_icon', icon: WipIcon, label: 'WIPs', nav_name: 'wips' },
     {
-      id: "shopping_icon",
+      id: 'shopping_icon',
       icon: ShoppingIcon,
-      label: "Shopping List",
-      nav_name: "list",
+      label: 'Shopping List',
+      nav_name: 'list',
     },
     {
-      id: "settings_icon",
+      id: 'settings_icon',
       icon: SettingsIcon,
-      label: "Settings",
-      nav_name: "settings",
+      label: 'Settings',
+      nav_name: 'settings',
     },
   ];
 

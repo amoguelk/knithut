@@ -1,6 +1,7 @@
-import { View, Pressable, Text } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { getStyles } from "./styles";
+import React from 'react';
+import { View, Pressable, Text } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { getStyles } from './styles';
 
 const Button = ({
   label,

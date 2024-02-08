@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { getStyles } from "./styles";
-import List from "@app/components/List";
-import Button from "@app/components/buttons/Button";
-import CreateItem from "./CreateItem";
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { View } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import List from 'components/List';
+import Button from 'components/buttons/Button';
+import CreateItem from './CreateItem';
+import { getStyles } from './styles';
 
 const ListScreen = () => {
   const { colors } = useTheme();
@@ -17,10 +17,10 @@ const ListScreen = () => {
   useEffect(() => {
     const loadItems = async () => {
       try {
-        const savedItems = await AsyncStorage.getItem("shopping_items");
+        const savedItems = await AsyncStorage.getItem('shopping_items');
         setItems(savedItems ? JSON.parse(savedItems) : []);
       } catch (error) {
-        console.log("🚩 Error loading shopping list items:", error);
+        console.log('🚩 Error loading shopping list items:', error);
       }
     };
     loadItems();
@@ -30,9 +30,9 @@ const ListScreen = () => {
     const saveItems = async () => {
       try {
         const stringifiedItems = JSON.stringify(items);
-        await AsyncStorage.setItem("shopping_items", stringifiedItems);
+        await AsyncStorage.setItem('shopping_items', stringifiedItems);
       } catch (error) {
-        console.log("🚩 Error saving shopping list items");
+        console.log('🚩 Error saving shopping list items');
       }
     };
     saveItems();
@@ -52,13 +52,13 @@ const ListScreen = () => {
 
   const handleModalClose = (reason, title, details) => {
     setModalVisible(false);
-    if (reason === "add") {
+    if (reason === 'add') {
       setItems((prev) => [
         ...prev,
         {
           checked: false,
           text: title,
-          details: details === "" ? null : details,
+          details: details === '' ? null : details,
         },
       ]);
     }

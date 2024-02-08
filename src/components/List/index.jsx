@@ -1,14 +1,15 @@
-import { Text, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { getStyles } from "./styles";
-import ListItem from "./ListItem";
+import React from 'react';
+import { Text, View } from 'react-native';
+import { useTheme } from '@react-navigation/native';
+import { getStyles } from './styles';
+import ListItem from './ListItem';
 
 const List = ({
   items,
   checkable = false,
   setItemChecked,
   onItemDelete,
-  emptyText = "This list is empty",
+  emptyText = 'This list is empty',
 }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
