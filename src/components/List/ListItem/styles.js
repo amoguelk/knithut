@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (colors) =>
+const getStyles = (colors) =>
   StyleSheet.create({
     item: {
       borderBottomColor: colors.cardContrast,
       borderBottomWidth: 1,
       padding: 10,
-      flexDirection: "row",
-      alignItems: "center",
+      flexDirection: 'row',
+      alignItems: 'center',
       minHeight: 70,
     },
     text: {
@@ -22,7 +22,9 @@ export const getStyles = (colors) =>
       marginRight: 5,
     },
     trashIcon: {
-      position: "absolute",
+      position: 'absolute',
       right: 0,
     },
   });
+
+  export default getStyles;

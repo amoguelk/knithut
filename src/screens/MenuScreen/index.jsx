@@ -1,8 +1,12 @@
 import React from 'react';
+// Components
 import { View, Image } from 'react-native';
+import NavIcon from 'screens/MenuScreen/NavIcon';
+// Documentation
+import PropTypes from 'prop-types';
+// Styling
 import { useTheme } from '@react-navigation/native';
-import NavIcon from './NavIcon';
-import { getStyles } from './styles';
+import getStyles from './styles';
 
 const HutLogo = require('assets/img/hut.png');
 const PatternsIcon = require('assets/img/patterns.png');
@@ -51,6 +55,10 @@ const MenuScreen = ({ navigation }) => {
       </View>
     </View>
   );
+};
+
+MenuScreen.propTypes = {
+  navigation: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 export default MenuScreen;

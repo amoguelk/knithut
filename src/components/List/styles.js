@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (colors) =>
+const getStyles = (colors) =>
   StyleSheet.create({
     container: {
       borderRadius: 10,
@@ -11,6 +11,8 @@ export const getStyles = (colors) =>
     emptyText: {
       fontSize: 16,
       color: colors.cardMidContrast,
-      textAlign: "center",
+      textAlign: 'center',
     },
   });
+
+export default getStyles;

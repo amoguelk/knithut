@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (colors) =>
+const getStyles = (colors) =>
   StyleSheet.create({
     button: {
-      alignItems: "center",
+      alignItems: 'center',
       margin: 10,
     },
     icon: {
@@ -15,6 +15,8 @@ export const getStyles = (colors) =>
     label: {
       color: colors.text,
       fontSize: 16,
-      textAlign: "center",
+      textAlign: 'center',
     },
   });
+
+export default getStyles;

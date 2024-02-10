@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // Theme
 import { useColorScheme } from 'react-native';
 import { KHDarkTheme, KHLightTheme } from '_constants/theme';
+// Documentation
+import PropTypes from 'prop-types';
 
 export const AppContext = React.createContext(null);
 
@@ -21,7 +23,7 @@ const AppContextProvider = ({ children }) => {
           setTheme(savedScheme === 'dark' ? KHDarkTheme : KHLightTheme);
         }
       } catch (error) {
-        console.log('🚩 Error loading scheme');
+        console.error('🚩 Error loading scheme');
       }
     };
     getScheme();
@@ -33,6 +35,11 @@ const AppContextProvider = ({ children }) => {
       {children}
     </AppContext.Provider>
   );
+};
+
+AppContextProvider.propTypes = {
+  // The contents of the app
+  children: PropTypes.node.isRequired,
 };
 
 export default AppContextProvider;

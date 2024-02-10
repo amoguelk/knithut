@@ -1,8 +1,15 @@
 import React from 'react';
+// Components
 import { View, Pressable, Text } from 'react-native';
+// Documentation
+import PropTypes from 'prop-types';
+// Styling
 import { useTheme } from '@react-navigation/native';
-import { getStyles } from './styles';
+import getStyles from './styles';
 
+/**
+ * A simple button component.
+ */
 const Button = ({
   label,
   onPress = () => {},
@@ -23,6 +30,33 @@ const Button = ({
       </Pressable>
     </View>
   );
+};
+
+Button.propTypes = {
+  /**
+   * The text on the button. Required.
+   */
+  label: PropTypes.string.isRequired,
+  /**
+   * Called when a single tap is detected. Optional.
+   */
+  onPress: PropTypes.func,
+  /**
+   * Additional styles applied to the `View` that contains the button. Optional.
+   */
+  containerStyle: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ),
+  /**
+   * Whether the button is disabled or not. Optional. Defaults to `false`.
+   */
+  disabled: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  onPress: () => {},
+  containerStyle: {},
+  disabled: false,
 };
 
 export default Button;
