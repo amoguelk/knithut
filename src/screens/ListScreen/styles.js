@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (colors) =>
+const getStyles = (colors) =>
   StyleSheet.create({
     listContainer: {
       borderRadius: 10,
@@ -9,3 +9,5 @@ export const getStyles = (colors) =>
       padding: 20,
     },
   });
+
+export default getStyles;

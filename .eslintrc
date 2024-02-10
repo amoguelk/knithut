@@ -3,10 +3,11 @@
     "parser": "@babel/eslint-parser",
     "rules": {
       "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+      "no-console": ["warn", { "allow": ["warn", "error"] }],
       "react/function-component-definition": 0,
       "react/no-array-index-key": 0,
       "no-unused-vars": "warn",
-      "react/prop-types": 0 // Change after doc
+      "react/require-default-props": "warn"
     },
     "plugins": ["@babel"],
     "settings": {

@@ -1,27 +1,29 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (colors) =>
+const getStyles = (colors) =>
   StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     logo: {
       width: 350,
       height: 350,
-      position: "absolute",
+      position: 'absolute',
     },
     navContainer: {
-      width: "100%",
+      width: '100%',
       height: 400,
     },
     icon: (i) => ({
-      position: "absolute",
+      position: 'absolute',
       left: i % 2 === 0 ? 10 : null,
       right: i % 2 !== 0 ? 10 : null,
       top: i < 2 ? 0 : null,
       bottom: i >= 2 ? 0 : null,
     }),
   });
+
+export default getStyles;

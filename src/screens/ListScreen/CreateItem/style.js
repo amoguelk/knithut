@@ -1,33 +1,33 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (colors) =>
+const getStyles = (colors) =>
   StyleSheet.create({
     alert: {
       flex: 1,
-      justifyContent: "center",
+      justifyContent: 'center',
     },
     body: {
       backgroundColor: colors.border,
       padding: 10,
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center',
       borderRadius: 10,
     },
     title: {
       color: colors.text,
-      fontWeight: "bold",
+      fontWeight: 'bold',
       fontSize: 30,
-      textAlign: "center",
+      textAlign: 'center',
     },
     actions: {
-      flexDirection: "row",
-      justifyContent: "center",
+      flexDirection: 'row',
+      justifyContent: 'center',
     },
     actionButton: {
       flex: 1,
     },
     textInput: {
-      textAlignVertical: "top",
+      textAlignVertical: 'top',
       backgroundColor: colors.card,
       color: colors.cardContrast,
       fontSize: 20,
@@ -35,12 +35,14 @@ export const getStyles = (colors) =>
       margin: 5,
     },
     backdrop: {
-      backgroundColor: "#000",
+      backgroundColor: '#000',
       opacity: 0.5,
-      position: "absolute",
+      position: 'absolute',
       top: 0,
       left: 0,
       bottom: 0,
       right: 0,
     },
   });
+
+export default getStyles;

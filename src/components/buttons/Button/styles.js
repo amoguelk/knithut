@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 
-export const getStyles = (colors) =>
+const getStyles = (colors) =>
   StyleSheet.create({
     button: {
       borderRadius: 10,
-      alignItems: "center",
-      justifyContent: "center",
+      alignItems: 'center',
+      justifyContent: 'center',
       paddingHorizontal: 20,
       paddingVertical: 15,
       margin: 5,
@@ -17,3 +17,5 @@ export const getStyles = (colors) =>
       fontSize: 20,
     },
   });
+
+export default getStyles;
