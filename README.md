@@ -8,7 +8,7 @@ A mobile app to help you keep track of your knitting and crocheting projects, bo
 
 ## To-Do
 - [x] Linting
-- [ ] Documentation
+- [x] Documentation
 - [ ] Screen transitions
 - [ ] Accessibility 
 - [ ] Settings screen
