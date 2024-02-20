@@ -26,6 +26,7 @@ const Navigator = () => {
           headerTitleAlign: 'center',
           headerShadowVisible: false,
           headerBackTitleVisible: false,
+          animation: 'slide_from_bottom',
         }}
       >
         <Stack.Screen
