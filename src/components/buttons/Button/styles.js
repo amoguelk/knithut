@@ -10,7 +10,7 @@ const getStyles = (colors) =>
       paddingVertical: 15,
       margin: 5,
     },
-    disabled: { backgroundColor: colors.cardMidContrast },
+    disabled: { backgroundColor: colors.disabled },
     enabled: { backgroundColor: colors.primary },
     buttonLabel: {
       color: colors.text,

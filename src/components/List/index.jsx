@@ -35,6 +35,7 @@ const List = ({
             checked={checkable && item?.checked}
             setChecked={checkable ? () => setItemChecked(index) : () => {}}
             onDelete={() => onItemDelete(index)}
+            onPress={item?.onPress ? item?.onPress : () => {}}
           />
         ))}
     </View>
@@ -45,15 +46,14 @@ List.propTypes = {
   /**
    * The items that go in the list, in the form of an array of objects. Required.
    *
-   * Each object must include a `text` key, which contains the main text of the item.
-   * Optionally, they can also contain a `details` key (with supplementary text) and
-   * a `checked` key, which indicates if the item is checked, if the list supports it.
+   * Each object must include a `text` key, which contains the main text of the item. Optionally, they can also contain a `details` key (with supplementary text), a `checked` key, which indicates if the item is checked, if the list supports it, and an `onPress` function.
    */
   items: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       details: PropTypes.string,
       checked: PropTypes.bool,
+      onPress: PropTypes.func,
     })
   ).isRequired,
   /**
