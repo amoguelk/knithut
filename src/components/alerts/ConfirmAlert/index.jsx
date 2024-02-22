@@ -1,5 +1,8 @@
 import { Alert } from "react-native";
 
+/**
+ * @deprecated
+ */
 const createConfirmAlert = ({
   title,
   message,
