@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Components
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import IconButton from 'components/buttons/IconButton';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import createConfirmAlert from 'components/alerts/ConfirmAlert';
+import ConfirmModal from 'components/modals/ConfirmModal';
 // Documentation
 import PropTypes from 'prop-types';
 // Styling
@@ -21,9 +21,13 @@ const ListItem = ({
   checked = false,
   setChecked = () => {},
   onDelete,
+  onPress = () => {},
 }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
   return (
     <View style={styles.item}>
       {checkable && (
@@ -34,24 +38,25 @@ const ListItem = ({
           color={colors.border}
         />
       )}
-      <View>
+      <Pressable onPress={onPress}>
         <Text style={styles.text}>{text}</Text>
         {details && <Text style={styles.details}>{details}</Text>}
-      </View>
+      </Pressable>
       <IconButton
         icon={faTrashCan}
         customStyle={styles.trashIcon}
         size={20}
         color={colors.cardContrast}
         rippleColor={colors.cardContrast}
-        onPress={() =>
-          createConfirmAlert({
-            title: 'Delete item?',
-            message: `Delete item "${text}"?`,
-            confirmText: 'Delete',
-            confirmAction: onDelete,
-          })
-        }
+        onPress={() => setDeleteModalVisible(true)}
+      />
+      <ConfirmModal
+        isVisible={deleteModalVisible}
+        title='Delete item?'
+        message={`Delete item "${text}"?`}
+        confirmText='Delete'
+        confirmAction={onDelete}
+        cancelAction={() => setDeleteModalVisible(false)}
       />
     </View>
   );
@@ -82,6 +87,10 @@ ListItem.propTypes = {
    * Called when the item is deleted. Required.
    */
   onDelete: PropTypes.func.isRequired,
+  /**
+   * Called when the item is pressed. Optional.
+   */
+  onPress: PropTypes.func,
 };
 
 ListItem.defaultProps = {
@@ -89,6 +98,7 @@ ListItem.defaultProps = {
   checkable: false,
   checked: false,
   setChecked: () => {},
+  onPress: () => {},
 };
 
 export default ListItem;
