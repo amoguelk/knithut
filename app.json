@@ -25,6 +25,9 @@
     },
     "web": {
       "favicon": "./src/assets/img/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-localization"
+    ]
   }
 }

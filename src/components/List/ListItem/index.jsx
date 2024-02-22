@@ -7,6 +7,8 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import ConfirmModal from 'components/modals/ConfirmModal';
 // Documentation
 import PropTypes from 'prop-types';
+// Translation
+import {useTranslation} from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
@@ -25,8 +27,14 @@ const ListItem = ({
 }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
 
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+
+  const handleDelete = () => {
+    setDeleteModalVisible(false);
+    onDelete();
+  };
 
   return (
     <View style={styles.item}>
@@ -52,10 +60,10 @@ const ListItem = ({
       />
       <ConfirmModal
         isVisible={deleteModalVisible}
-        title='Delete item?'
-        message={`Delete item "${text}"?`}
-        confirmText='Delete'
-        confirmAction={onDelete}
+        title={t('delete_item')}
+        message={t('delete_item_detail', { item: text })}
+        confirmText={t('delete')}
+        confirmAction={handleDelete}
         cancelAction={() => setDeleteModalVisible(false)}
       />
     </View>

@@ -5,6 +5,8 @@ import BasicModal from 'components/modals/BasicModal';
 import Button from 'components/buttons/Button';
 // Documentation
 import PropTypes from 'prop-types';
+// Translation
+import {useTranslation} from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
@@ -15,6 +17,7 @@ import getStyles from './styles';
 const CreateItem = ({ isVisible, onClose }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
 
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
@@ -35,7 +38,7 @@ const CreateItem = ({ isVisible, onClose }) => {
       <View>
         <TextInput
           style={styles.textInput}
-          placeholder='Golden yarn of Ariadne'
+          placeholder={t('item_title_hint')}
           onChangeText={(text) => setTitle(text)}
           defaultValue={title}
           maxLength={50}
@@ -43,7 +46,7 @@ const CreateItem = ({ isVisible, onClose }) => {
         />
         <TextInput
           style={styles.textInput}
-          placeholder='Make sure it is several yards long, that labyrinth is quite big'
+          placeholder={t('item_details_hint')}
           onChangeText={(text) => setDetails(text)}
           defaultValue={details}
           multiline

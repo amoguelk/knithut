@@ -4,6 +4,8 @@ import { Text, View } from 'react-native';
 import ListItem from 'components/List/ListItem';
 // Documentation
 import PropTypes from 'prop-types';
+// Translation
+import {useTranslation} from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
@@ -17,14 +19,17 @@ const List = ({
   onItemDelete,
   checkable = false,
   setItemChecked = () => {},
-  emptyText = 'This list is empty',
+  emptyText = null,
 }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
 
   return (
     <View style={styles.container}>
-      {items.length === 0 && <Text style={styles.emptyText}>{emptyText}</Text>}
+      {items.length === 0 && (
+        <Text style={styles.emptyText}>{emptyText || t('empty_list')}</Text>
+      )}
       {items.length > 0 &&
         items?.map((item, index) => (
           <ListItem
@@ -77,7 +82,7 @@ List.propTypes = {
 List.defaultProps = {
   checkable: false,
   setItemChecked: () => {},
-  emptyText: 'This list is empty',
+  emptyText: null,
 };
 
 export default List;

@@ -1,0 +1,23 @@
+{
+  "patterns": "Patrones",
+  "patterns_long": "Patrones guardados",
+  "wips": "Pendientes",
+  "wips_long": "Trabajos pendientes",
+  "shopping_list": "Lista de compras",
+  "settings": "Ajustes",
+  "delete": "Eliminar",
+  "delete_item": "¿Eliminar artículo?",
+  "delete_item_detail": "¿Eliminar artículo '{{item}}'?",
+  "empty_list": "Esta lista está vacía",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "item_title_hint": "Estambre dorado de Ariadne",
+  "item_details_hint": "Asegurarse de que sea muy largo, ese laberinto es bastante grande",
+  "empty_shopping_list": "Tu lista de compras está vacía",
+  "add_item": "Añadir artículo",
+  "kofi": "Mi Ko-Fi",
+  "current_theme": "Tema actual: {{theme}}",
+  "dark": "Oscuro",
+  "light": "Claro",
+  "change_language": "Cambiar idioma"
+}

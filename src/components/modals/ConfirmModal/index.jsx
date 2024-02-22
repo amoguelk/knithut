@@ -5,6 +5,8 @@ import { Text, View } from 'react-native';
 import Button from 'components/buttons/Button';
 // Documentation
 import PropTypes from 'prop-types';
+// Translation
+import {useTranslation} from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
@@ -18,11 +20,12 @@ const ConfirmModal = ({
   message = null,
   confirmAction,
   cancelAction,
-  cancelText = 'Cancel',
-  confirmText = 'Confirm',
+  cancelText = null,
+  confirmText = null,
 }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
 
   return (
     <BasicModal isVisible={isVisible} pressableBackdrop={false}>
@@ -30,12 +33,12 @@ const ConfirmModal = ({
       {message && <Text style={styles.text}>{message}</Text>}
       <View style={styles.actions}>
         <Button
-          label={cancelText}
+          label={cancelText || t('cancel')}
           onPress={cancelAction}
           containerStyle={styles.actionButton}
         />
         <Button
-          label={confirmText}
+          label={confirmText || t('confirm')}
           onPress={confirmAction}
           containerStyle={styles.actionButton}
         />
