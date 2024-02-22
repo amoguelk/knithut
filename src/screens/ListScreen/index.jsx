@@ -6,6 +6,8 @@ import Button from 'components/buttons/Button';
 import CreateItem from 'screens/ListScreen/CreateItem';
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// Translation
+import {useTranslation} from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
@@ -16,6 +18,7 @@ import getStyles from './styles';
 const ListScreen = () => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
 
   const [items, setItems] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -94,9 +97,9 @@ const ListScreen = () => {
         items={items}
         setItemChecked={setItemChecked}
         onItemDelete={onItemDelete}
-        emptyText='Your shopping list is empty'
+        emptyText={t('empty_shopping_list')}
       />
-      <Button label='Add item' onPress={() => setModalVisible(true)} />
+      <Button label={t('add_item')} onPress={() => setModalVisible(true)} />
       <CreateItem isVisible={modalVisible} onClose={handleModalClose} />
     </View>
   );

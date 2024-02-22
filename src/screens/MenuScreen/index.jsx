@@ -4,6 +4,8 @@ import { View, Image } from 'react-native';
 import NavIcon from 'screens/MenuScreen/NavIcon';
 // Documentation
 import PropTypes from 'prop-types';
+// Translation
+import {useTranslation} from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
@@ -17,24 +19,25 @@ const SettingsIcon = require('assets/img/settings.png');
 const MenuScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
   const options = [
     {
       id: 'pattern_icon',
       icon: PatternsIcon,
-      label: 'Patterns',
+      label: t('patterns'),
       nav_name: 'patterns',
     },
-    { id: 'wip_icon', icon: WipIcon, label: 'WIPs', nav_name: 'wips' },
+    { id: 'wip_icon', icon: WipIcon, label: t('wips'), nav_name: 'wips' },
     {
       id: 'shopping_icon',
       icon: ShoppingIcon,
-      label: 'Shopping List',
+      label: t('shopping_list'),
       nav_name: 'list',
     },
     {
       id: 'settings_icon',
       icon: SettingsIcon,
-      label: 'Settings',
+      label: t('settings'),
       nav_name: 'settings',
     },
   ];

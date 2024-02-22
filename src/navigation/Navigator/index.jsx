@@ -10,11 +10,14 @@ import ListScreen from 'screens/ListScreen';
 import SettingsScreen from 'screens/SettingsScreen';
 // Context
 import { AppContext } from '_utils/AppContextProvider';
+// Translation
+import {useTranslation} from 'react-i18next';
 
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
   const { theme } = useContext(AppContext);
+  const { t } = useTranslation();
   return (
     <NavigationContainer theme={theme}>
       <Stack.Navigator
@@ -40,22 +43,22 @@ const Navigator = () => {
         <Stack.Screen
           name='patterns'
           component={PatternsScreen}
-          options={{ title: 'Saved Patterns' }}
+          options={{ title: t('patterns_long') }}
         />
         <Stack.Screen
           name='wips'
           component={WipScreen}
-          options={{ title: 'Works in Progress' }}
+          options={{ title: t('wips_long') }}
         />
         <Stack.Screen
           name='list'
           component={ListScreen}
-          options={{ title: 'Shopping List' }}
+          options={{ title: t('shopping_list') }}
         />
         <Stack.Screen
           name='settings'
           component={SettingsScreen}
-          options={{ title: 'Settings' }}
+          options={{ title: t('settings') }}
         />
       </Stack.Navigator>
     </NavigationContainer>
