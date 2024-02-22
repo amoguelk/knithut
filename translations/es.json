@@ -18,5 +18,6 @@
   "kofi": "Mi Ko-Fi",
   "current_theme": "Tema actual: {{theme}}",
   "dark": "Oscuro",
-  "light": "Claro"
+  "light": "Claro",
+  "change_language": "Cambiar idioma"
 }
