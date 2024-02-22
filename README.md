@@ -14,5 +14,5 @@ A mobile app to help you keep track of your knitting and crocheting projects, bo
 - [ ] Accessibility 
 - [ ] Settings screen
 - [x] Fix item delete alert style
-- [ ] Splash screen
-- [ ] Translation
+- [x] Translation
+- [ ] Splash screen (?)
