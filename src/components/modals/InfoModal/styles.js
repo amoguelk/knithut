@@ -15,9 +15,6 @@ const getStyles = (colors) =>
       flexDirection: 'row',
       justifyContent: 'center',
     },
-    actionButton: {
-      flex: 1,
-    },
   });
 
 export default getStyles;

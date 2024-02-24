@@ -19,5 +19,8 @@
   "current_theme": "Current theme: {{theme}}",
   "dark": "Dark",
   "light": "Light",
-  "change_language": "Change Language"
+  "change_language": "Change Language",
+  "ok": "Ok",
+  "wow": "WOW",
+  "stopwatch_limit_message": "Wow, 999 hours on this project. That's cool. Unfortunately, I did set a 3-digit limit for the hours, so write that big number down elsewhere because the stopwatch will reset the moment you dismiss this alert."
 }
