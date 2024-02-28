@@ -8,6 +8,7 @@ import {
   faPlay,
   faRotateLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import * as Notifications from 'expo-notifications';
 import dayjs from 'dayjs';
 // Translation
 import { useTranslation } from 'react-i18next';
@@ -16,6 +17,14 @@ import PropTypes from 'prop-types';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 /**
  * A stopwatch component
@@ -69,21 +78,32 @@ const Stopwatch = ({
     };
   }, [active]);
 
-  const handleStartPause = () => {
+  const handleStartPause = async () => {
     if (!active) {
       setActive(true);
       setStartTime(dayjs().subtract(offset, 'second'));
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: t('stopwatch_running'),
+          body: t('stopwatch_running_message'),
+          sticky: true,
+          autoDismiss: false,
+        },
+        trigger: null,
+      });
     } else {
       setActive(false);
       setOffset(Math.floor(-startTime.diff() / 1000));
+      await Notifications.dismissAllNotificationsAsync();
     }
   };
 
-  const handleReset = () => {
+  const handleReset = async () => {
     clearInterval(ref.current);
     setActive(false);
     setDisplayTime({ h: '00', m: '00', s: '00' });
     setOffset(0);
+    await Notifications.dismissAllNotificationsAsync();
   };
 
   return (
