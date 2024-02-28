@@ -3,11 +3,10 @@ import { StyleSheet } from 'react-native';
 const getStyles = (colors) =>
   StyleSheet.create({
     container: {
-      backgroundColor: colors.border,
+      backgroundColor: colors.primary,
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center',
-      paddingHorizontal: 20,
       paddingVertical: 15,
       margin: 5,
     },
@@ -15,6 +14,16 @@ const getStyles = (colors) =>
       color: colors.text,
       fontSize: 30,
       fontWeight: 'bold',
+    },
+    iconButton: (size) => ({
+      backgroundColor: colors.background,
+      borderRadius: 50,
+      padding: size / 2,
+    }),
+    actions: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
 

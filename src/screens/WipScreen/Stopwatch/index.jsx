@@ -1,73 +1,117 @@
 import React, { useEffect, useRef, useState } from 'react';
 // Components
 import { Text, View } from 'react-native';
-import Button from 'components/buttons/Button';
 import InfoModal from 'components/modals/InfoModal';
+import IconButton from 'components/buttons/IconButton';
+import {
+  faPause,
+  faPlay,
+  faRotateLeft,
+} from '@fortawesome/free-solid-svg-icons';
+import dayjs from 'dayjs';
 // Translation
 import { useTranslation } from 'react-i18next';
+// Documentation
+import PropTypes from 'prop-types';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
 
-const Stopwatch = () => {
+/**
+ * A stopwatch component
+ */
+const Stopwatch = ({
+  startTime,
+  setStartTime,
+  active,
+  setActive,
+  offset,
+  setOffset,
+}) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
   const { t } = useTranslation();
 
-  const [hour, setHour] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
   const [secretModalVisible, setSecretModalVisible] = useState(false);
   const ref = useRef(null);
 
   const padNumbers = (num) => (num < 10 ? `0${num}` : String(num));
 
-  useEffect(() => {
-    if (isRunning) {
-      ref.current = setInterval(() => {
-        if (second < 59) setSecond((prev) => prev + 1);
-        else {
-          setSecond(0);
-          if (minute < 59) setMinute((prev) => prev + 1);
-          else {
-            setMinute(0);
-            setHour((prev) => prev + 1);
-            if (hour >= 998) {
-              setIsRunning(false);
-              setSecretModalVisible(true);
-            }
-          }
-        }
-      }, 1);
-    } else {
-      clearInterval(ref.current);
+  const calculateDisplayTime = () => {
+    const msElapsed = -startTime.diff();
+    const sElapsed = Math.floor(msElapsed / 1000);
+    const mElapsed = Math.floor(sElapsed / 60);
+    const hElapsed = Math.floor(mElapsed / 60);
+    if (hElapsed <= 999) {
+      return {
+        h: padNumbers(hElapsed),
+        m: padNumbers(mElapsed % 60),
+        s: padNumbers(sElapsed % 60),
+      };
     }
+    setActive(false);
+    setSecretModalVisible(true);
+    return { h: '00', m: '00', s: '00' };
+  };
+
+  const [displayTime, setDisplayTime] = useState(calculateDisplayTime());
+
+  // Create counting interval
+  useEffect(() => {
+    if (active) {
+      ref.current = setInterval(() => {
+        setDisplayTime(calculateDisplayTime());
+      }, 1000);
+    }
+
     return () => {
       clearInterval(ref.current);
     };
-  }, [isRunning, second]);
+  }, [active]);
+
+  const handleStartPause = () => {
+    if (!active) {
+      setActive(true);
+      setStartTime(dayjs().subtract(offset, 'second'));
+    } else {
+      setActive(false);
+      setOffset(Math.floor(-startTime.diff() / 1000));
+    }
+  };
 
   const handleReset = () => {
     clearInterval(ref.current);
-    setIsRunning(false);
-    setHour(0);
-    setMinute(0);
-    setSecond(0);
+    setActive(false);
+    setDisplayTime({ h: '00', m: '00', s: '00' });
+    setOffset(0);
   };
 
   return (
     <View>
       <View style={styles.container}>
         <Text style={styles.text}>
-          {padNumbers(hour)} : {padNumbers(minute)} : {padNumbers(second)}
+          {displayTime.h} : {displayTime.m} : {displayTime.s}
         </Text>
+        <View style={styles.actions}>
+          <IconButton
+            color={colors.text}
+            size={25}
+            customStyle={styles.iconButton(25)}
+            icon={faRotateLeft}
+            rippleColor={colors.border}
+            onPress={handleReset}
+          />
+          <IconButton
+            color={colors.text}
+            size={40}
+            customStyle={styles.iconButton(40)}
+            icon={active ? faPause : faPlay}
+            rippleColor={colors.primary}
+            onPress={handleStartPause}
+          />
+        </View>
       </View>
-      <Button
-        label={isRunning ? 'STOP' : 'START'}
-        onPress={() => setIsRunning((prev) => !prev)}
-      />
-      <Button label='RESET' onPress={handleReset} />
+
       <InfoModal
         isVisible={secretModalVisible}
         title={t('wow')}
@@ -79,6 +123,15 @@ const Stopwatch = () => {
       />
     </View>
   );
+};
+
+Stopwatch.propTypes = {
+  startTime: PropTypes.instanceOf(dayjs.Dayjs).isRequired,
+  setStartTime: PropTypes.func.isRequired,
+  active: PropTypes.bool.isRequired,
+  setActive: PropTypes.func.isRequired,
+  offset: PropTypes.number.isRequired,
+  setOffset: PropTypes.func.isRequired,
 };
 
 export default Stopwatch;
