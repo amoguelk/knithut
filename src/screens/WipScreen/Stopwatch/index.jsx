@@ -47,7 +47,7 @@ const Stopwatch = ({
   const padNumbers = (num) => (num < 10 ? `0${num}` : String(num));
 
   const calculateDisplayTime = () => {
-    const msElapsed = -startTime.diff();
+    const msElapsed = -dayjs(startTime).diff();
     const sElapsed = Math.floor(msElapsed / 1000);
     const mElapsed = Math.floor(sElapsed / 60);
     const hElapsed = Math.floor(mElapsed / 60);
@@ -81,7 +81,7 @@ const Stopwatch = ({
   const handleStartPause = async () => {
     if (!active) {
       setActive(true);
-      setStartTime(dayjs().subtract(offset, 'second'));
+      setStartTime(dayjs().subtract(offset, 'second').toString());
       await Notifications.scheduleNotificationAsync({
         content: {
           title: t('stopwatch_running'),
@@ -93,7 +93,7 @@ const Stopwatch = ({
       });
     } else {
       setActive(false);
-      setOffset(Math.floor(-startTime.diff() / 1000));
+      setOffset(Math.floor(-dayjs(startTime).diff() / 1000));
       await Notifications.dismissAllNotificationsAsync();
     }
   };
@@ -115,19 +115,19 @@ const Stopwatch = ({
         <View style={styles.actions}>
           <IconButton
             color={colors.text}
+            size={50}
+            customStyle={styles.iconButton(50)}
+            icon={active ? faPause : faPlay}
+            rippleColor={colors.primary}
+            onPress={handleStartPause}
+          />
+          <IconButton
+            color={colors.text}
             size={25}
             customStyle={styles.iconButton(25)}
             icon={faRotateLeft}
             rippleColor={colors.border}
             onPress={handleReset}
-          />
-          <IconButton
-            color={colors.text}
-            size={40}
-            customStyle={styles.iconButton(40)}
-            icon={active ? faPause : faPlay}
-            rippleColor={colors.primary}
-            onPress={handleStartPause}
           />
         </View>
       </View>
@@ -146,11 +146,29 @@ const Stopwatch = ({
 };
 
 Stopwatch.propTypes = {
-  startTime: PropTypes.instanceOf(dayjs.Dayjs).isRequired,
+  /**
+   * The point from which the stopwatch measures time. Required.
+   */
+  startTime: PropTypes.string.isRequired,
+  /**
+   * Function to modify the value of the start time. Required.
+   */
   setStartTime: PropTypes.func.isRequired,
+  /**
+   * Whether the stopwatch is active (running) or not. Required.
+   */
   active: PropTypes.bool.isRequired,
+  /**
+   * Function to modify the stopwatch's active state. Required.
+   */
   setActive: PropTypes.func.isRequired,
+  /**
+   * An offset in seconds that is added to the stopwatch to keep track of pauses. Required.
+   */
   offset: PropTypes.number.isRequired,
+  /**
+   * Function to modify the value of the offset. Required.
+   */
   setOffset: PropTypes.func.isRequired,
 };
 

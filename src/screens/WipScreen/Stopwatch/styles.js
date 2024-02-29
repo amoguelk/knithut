@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const getStyles = (colors) =>
   StyleSheet.create({
     container: {
-      backgroundColor: colors.primary,
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center',
@@ -12,7 +11,7 @@ const getStyles = (colors) =>
     },
     text: {
       color: colors.text,
-      fontSize: 30,
+      fontSize: 40,
       fontWeight: 'bold',
     },
     iconButton: (size) => ({

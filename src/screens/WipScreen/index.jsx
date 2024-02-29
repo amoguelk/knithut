@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 // Components
-import { Text, View } from 'react-native';
+import { Text, View, TextInput, KeyboardAvoidingView } from 'react-native';
 import Stopwatch from 'screens/WipScreen/Stopwatch';
+import RowCounter from 'screens/WipScreen/RowCounter';
 import dayjs from 'dayjs';
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,8 +18,12 @@ const WipScreen = () => {
   const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
-
-  const [stopwatchStart, setStopwatchStart] = useState(dayjs());
+  const [patternName, setPatternName] = useState('');
+  const [patternSection, setPatternSection] = useState('');
+  const [row, setRow] = useState(0);
+  const [notes, setNotes] = useState('');
+  // Stopwatch states
+  const [stopwatchStart, setStopwatchStart] = useState(dayjs().toString());
   const [stopwatchActive, setStopwatchActive] = useState(false);
   const [stopwatchOffset, setStopwatchOffset] = useState(0);
 
@@ -29,12 +34,16 @@ const WipScreen = () => {
       try {
         const savedWipJson = await AsyncStorage.getItem('wip');
         const savedWip = JSON.parse(savedWipJson);
+        setRow(savedWip.row || 0);
+        setPatternName(savedWip.patternName || '');
+        setPatternSection(savedWip.patternSection || '');
+        setNotes(savedWip.notes || '');
         setStopwatchActive(savedWip.stopwatchActive);
         if (savedWip.stopwatchActive) {
-          setStopwatchStart(dayjs(savedWip.stopwatchStart));
+          setStopwatchStart(savedWip.stopwatchStart);
         } else {
           setStopwatchStart(
-            dayjs().subtract(savedWip.stopwatchOffset, 'second')
+            dayjs().subtract(savedWip.stopwatchOffset, 'second').toString()
           );
         }
         setStopwatchOffset(savedWip.stopwatchOffset);
@@ -52,7 +61,11 @@ const WipScreen = () => {
     const saveWip = async () => {
       try {
         const stringifiedWip = JSON.stringify({
-          stopwatchStart: stopwatchStart.toString(),
+          row,
+          patternName,
+          patternSection,
+          notes,
+          stopwatchStart,
           stopwatchOffset,
           stopwatchActive,
         });
@@ -62,25 +75,69 @@ const WipScreen = () => {
       }
     };
     saveWip();
-  }, [stopwatchStart, stopwatchOffset, stopwatchActive]);
+  }, [
+    stopwatchStart,
+    stopwatchOffset,
+    stopwatchActive,
+    notes,
+    patternName,
+    patternSection,
+    row,
+  ]);
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior='height' style={styles.container}>
       {loading && <Text>Loading...</Text>}
       {loading || (
         <View>
-          <Text style={styles.sectionTitle}>{t('stopwatch')}</Text>
-          <Stopwatch
-            startTime={stopwatchStart}
-            setStartTime={setStopwatchStart}
-            active={stopwatchActive}
-            setActive={setStopwatchActive}
-            offset={stopwatchOffset}
-            setOffset={setStopwatchOffset}
-          />
+          <View style={[styles.subContainer, styles.infoContainer]}>
+            <RowCounter row={row} setRow={setRow} />
+            <View style={styles.patternInfo}>
+              <TextInput
+                style={[styles.text, styles.title, styles.simpleInput]}
+                onChangeText={(text) => setPatternName(text)}
+                defaultValue={patternName}
+                placeholder={t('pattern_name')}
+                maxLength={20}
+                placeholderTextColor={colors.text}
+              />
+              <TextInput
+                style={[styles.text, styles.simpleInput]}
+                onChangeText={(text) => setPatternSection(text)}
+                defaultValue={patternSection}
+                placeholder={t('pattern_section')}
+                multiline
+                numberOfLines={2}
+                maxLength={50}
+                placeholderTextColor={colors.text}
+              />
+            </View>
+          </View>
+          {/* NOTES */}
+          <View style={styles.subContainer}>
+            <Text style={[styles.text, styles.title]}>{t('notes')}</Text>
+            <TextInput
+              style={styles.notesInput}
+              onChangeText={(text) => setNotes(text)}
+              defaultValue={notes}
+              multiline
+              maxLength={500}
+            />
+          </View>
+          {/* STOPWATCH */}
+          <View style={styles.subContainer}>
+            <Stopwatch
+              startTime={stopwatchStart}
+              setStartTime={setStopwatchStart}
+              active={stopwatchActive}
+              setActive={setStopwatchActive}
+              offset={stopwatchOffset}
+              setOffset={setStopwatchOffset}
+            />
+          </View>
         </View>
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
