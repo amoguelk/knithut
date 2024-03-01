@@ -1,18 +1,15 @@
 import React from 'react';
+// Components
 import { View } from 'react-native';
-import Button from 'components/buttons/Button';
-import createConfirmAlert from 'components/alerts/ConfirmAlert';
 import ThemeButton from './ThemeButton';
+import KoFiButton from './KoFiButton';
+import LanguageButton from './LanguageButton';
 
 const SettingsScreen = () => (
   <View>
     <ThemeButton />
-    <Button
-      label='My Ko-Fi'
-      onPress={() =>
-        createConfirmAlert({ title: 'Money', message: 'Give me money please' })
-      }
-    />
+    <KoFiButton />
+    <LanguageButton />
   </View>
 );
 

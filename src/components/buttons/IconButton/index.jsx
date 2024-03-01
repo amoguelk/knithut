@@ -21,7 +21,7 @@ const IconButton = ({
 }) => (
   <Pressable
     onPress={onPress}
-    style={{ ...customStyle, ...styles.button }}
+    style={{ ...styles.button, ...customStyle }}
     android_ripple={{ color: rippleColor, borderless: true }}
   >
     <FontAwesomeIcon icon={icon} size={size} color={color} />

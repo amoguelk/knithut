@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 // Components
-import { Modal, View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
+import BasicModal from 'components/modals/BasicModal';
 import Button from 'components/buttons/Button';
 // Documentation
 import PropTypes from 'prop-types';
+// Translation
+import {useTranslation} from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
-import getStyles from './style';
+import getStyles from './styles';
 
 /**
  * Modal to create an item and add it to the shopping list
@@ -14,6 +17,7 @@ import getStyles from './style';
 const CreateItem = ({ isVisible, onClose }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const { t } = useTranslation();
 
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
@@ -25,46 +29,45 @@ const CreateItem = ({ isVisible, onClose }) => {
   };
 
   return (
-    <Modal animationType='fade' visible={isVisible} transparent>
-      <View style={styles.backdrop} />
-      <View style={styles.alert}>
-        <View style={styles.body}>
-          <Text style={styles.title}>Add an item</Text>
-          <View>
-            <TextInput
-              style={styles.textInput}
-              placeholder='Golden yarn of Ariadne'
-              onChangeText={(text) => setTitle(text)}
-              defaultValue={title}
-              maxLength={50}
-              placeholderTextColor={colors.cardMidContrast}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder='Make sure it is several yards long, that labyrinth is quite big'
-              onChangeText={(text) => setDetails(text)}
-              defaultValue={details}
-              multiline
-              maxLength={150}
-              placeholderTextColor={colors.cardMidContrast}
-            />
-          </View>
-          <View style={styles.actions}>
-            <Button
-              label='Cancel'
-              onPress={() => handleClose('cancel')}
-              containerStyle={styles.actionButton}
-            />
-            <Button
-              label='Add'
-              onPress={() => handleClose('add')}
-              containerStyle={styles.actionButton}
-              disabled={title === ''}
-            />
-          </View>
-        </View>
+    <BasicModal
+      isVisible={isVisible}
+      onClose={() => handleClose('cancel')}
+      pressableBackdrop={false}
+    >
+      <Text style={styles.title}>Add an item</Text>
+      <View>
+        <TextInput
+          style={styles.textInput}
+          placeholder={t('item_title_hint')}
+          onChangeText={(text) => setTitle(text)}
+          defaultValue={title}
+          maxLength={50}
+          placeholderTextColor={colors.cardMidContrast}
+        />
+        <TextInput
+          style={styles.textInput}
+          placeholder={t('item_details_hint')}
+          onChangeText={(text) => setDetails(text)}
+          defaultValue={details}
+          multiline
+          maxLength={150}
+          placeholderTextColor={colors.cardMidContrast}
+        />
       </View>
-    </Modal>
+      <View style={styles.actions}>
+        <Button
+          label='Cancel'
+          onPress={() => handleClose('cancel')}
+          containerStyle={styles.actionButton}
+        />
+        <Button
+          label='Add'
+          onPress={() => handleClose('add')}
+          containerStyle={styles.actionButton}
+          disabled={title === ''}
+        />
+      </View>
+    </BasicModal>
   );
 };
 

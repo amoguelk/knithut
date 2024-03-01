@@ -4,12 +4,17 @@ A mobile app to help you keep track of your knitting and crocheting projects, bo
 ## Current functionalities
 - [x] Create a shopping list of needed materials
 - [ ] Display saved patterns
-- [ ] Manage current projects
+    - [ ] Divide by type
+- [x] Manage current projects
+    - [ ] Tabs for different projects
 
 ## To-Do
 - [x] Linting
 - [x] Documentation
-- [ ] Screen transitions
+- [x] Screen transitions
+- [ ] Organize storage labelling
 - [ ] Accessibility 
 - [ ] Settings screen
-- [ ] Fix item delete alert style
+- [x] Fix item delete alert style
+- [x] Translation
+- [ ] Splash screen (?)
