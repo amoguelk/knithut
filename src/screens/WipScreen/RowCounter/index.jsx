@@ -32,14 +32,14 @@ const RowCounter = ({ row, setRow }) => {
           color={colors.text}
           icon={faArrowUp}
           customStyle={styles.counterButton}
-          onPress={() => setRow((prev) => prev + 1)}
+          onPress={() => setRow(row + 1)}
         />
         <IconButton
           size={30}
           color={colors.text}
           icon={faArrowDown}
           customStyle={styles.counterButton}
-          onPress={() => setRow((prev) => (prev > 0 ? prev - 1 : prev))}
+          onPress={() => setRow(row > 0 ? row - 1 : row)}
         />
       </View>
     </View>
