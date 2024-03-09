@@ -1,4 +1,7 @@
+// Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import storageKeys from '_constants/storageKeys';
+// Localization
 import * as Localization from 'expo-localization';
 
 const languageDetectorPlugin = {
@@ -7,7 +10,9 @@ const languageDetectorPlugin = {
   init: () => {},
   detect: async (callback) => {
     try {
-      const language = await AsyncStorage.getItem('language');
+      const language = await AsyncStorage.getItem(
+        storageKeys.SETTINGS.LANGUAGE
+      );
       if (language) {
         return callback(language);
       }
@@ -19,7 +24,7 @@ const languageDetectorPlugin = {
   },
   cacheUserLanguage: async (language) => {
     try {
-      await AsyncStorage.setItem('language', language);
+      await AsyncStorage.setItem(storageKeys.SETTINGS.LANGUAGE, language);
     } catch (error) {
       console.error('🚩 Error saving language', error);
     }

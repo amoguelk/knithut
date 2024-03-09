@@ -6,6 +6,7 @@ import RowCounter from 'screens/WipScreen/RowCounter';
 import dayjs from 'dayjs';
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import storageKeys from '_constants/storageKeys';
 // Translation
 import { useTranslation } from 'react-i18next';
 // Styling
@@ -18,38 +19,47 @@ const WipScreen = () => {
   const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
-  const [patternName, setPatternName] = useState('');
-  const [patternSection, setPatternSection] = useState('');
-  const [row, setRow] = useState(0);
-  const [notes, setNotes] = useState('');
-  // Stopwatch states
-  const [stopwatchStart, setStopwatchStart] = useState(dayjs().toString());
-  const [stopwatchActive, setStopwatchActive] = useState(false);
-  const [stopwatchOffset, setStopwatchOffset] = useState(0);
+  const [pattern, setPattern] = useState({
+    name: '',
+    section: '',
+    row: 0,
+    notes: '',
+  });
+  const [stopwatch, setStopwatch] = useState({
+    active: false,
+    start: dayjs().toString(),
+    offset: 0,
+  });
 
   // Loads WIP saved in storage when the component is mounted
   useEffect(() => {
+    setLoading(true);
     const loadWip = async () => {
-      setLoading(true);
       try {
-        const savedWipJson = await AsyncStorage.getItem('wip');
-        const savedWip = JSON.parse(savedWipJson);
-        setRow(savedWip.row || 0);
-        setPatternName(savedWip.patternName || '');
-        setPatternSection(savedWip.patternSection || '');
-        setNotes(savedWip.notes || '');
-        setStopwatchActive(savedWip.stopwatchActive);
-        if (savedWip.stopwatchActive) {
-          setStopwatchStart(savedWip.stopwatchStart);
-        } else {
-          setStopwatchStart(
-            dayjs().subtract(savedWip.stopwatchOffset, 'second').toString()
+        const savedWipJson = await AsyncStorage.getItem(storageKeys.APP.WIPS);
+        if (savedWipJson) {
+          const savedWip = JSON.parse(savedWipJson);
+          setPattern(
+            savedWip?.pattern || {
+              name: '',
+              section: '',
+              row: 0,
+              notes: '',
+            }
           );
+          setStopwatch({
+            active: savedWip?.stopwatch.active || false,
+            offset: savedWip?.stopwatch.offset || 0,
+            start: savedWip?.stopwatch.active
+              ? savedWip?.stopwatch.start || dayjs().toString()
+              : dayjs()
+                  .subtract(savedWip?.stopwatch.offset, 'second')
+                  .toString(),
+          });
         }
-        setStopwatchOffset(savedWip.stopwatchOffset);
+        setLoading(false);
       } catch (error) {
-        console.error('🚩 Error loading stopwatch time:', error);
-      } finally {
+        console.error('🚩 Error loading saved WIP:', error);
         setLoading(false);
       }
     };
@@ -61,29 +71,16 @@ const WipScreen = () => {
     const saveWip = async () => {
       try {
         const stringifiedWip = JSON.stringify({
-          row,
-          patternName,
-          patternSection,
-          notes,
-          stopwatchStart,
-          stopwatchOffset,
-          stopwatchActive,
+          pattern,
+          stopwatch,
         });
-        await AsyncStorage.setItem('wip', stringifiedWip);
+        await AsyncStorage.setItem(storageKeys.APP.WIPS, stringifiedWip);
       } catch (error) {
         console.error('🚩 Error saving WIP:', error);
       }
     };
     saveWip();
-  }, [
-    stopwatchStart,
-    stopwatchOffset,
-    stopwatchActive,
-    notes,
-    patternName,
-    patternSection,
-    row,
-  ]);
+  }, [pattern, stopwatch]);
 
   return (
     <KeyboardAvoidingView behavior='height' style={styles.container}>
@@ -91,20 +88,27 @@ const WipScreen = () => {
       {loading || (
         <View>
           <View style={[styles.subContainer, styles.infoContainer]}>
-            <RowCounter row={row} setRow={setRow} />
+            <RowCounter
+              row={pattern.row}
+              setRow={(r) => setPattern((prev) => ({ ...prev, row: r }))}
+            />
             <View style={styles.patternInfo}>
               <TextInput
                 style={[styles.text, styles.title, styles.simpleInput]}
-                onChangeText={(text) => setPatternName(text)}
-                defaultValue={patternName}
+                onChangeText={(text) =>
+                  setPattern((prev) => ({ ...prev, name: text }))
+                }
+                defaultValue={pattern.name}
                 placeholder={t('pattern_name')}
                 maxLength={20}
                 placeholderTextColor={colors.text}
               />
               <TextInput
                 style={[styles.text, styles.simpleInput]}
-                onChangeText={(text) => setPatternSection(text)}
-                defaultValue={patternSection}
+                onChangeText={(text) =>
+                  setPattern((prev) => ({ ...prev, section: text }))
+                }
+                defaultValue={pattern.section}
                 placeholder={t('pattern_section')}
                 multiline
                 numberOfLines={2}
@@ -118,8 +122,10 @@ const WipScreen = () => {
             <Text style={[styles.text, styles.title]}>{t('notes')}</Text>
             <TextInput
               style={styles.notesInput}
-              onChangeText={(text) => setNotes(text)}
-              defaultValue={notes}
+              onChangeText={(text) =>
+                setPattern((prev) => ({ ...prev, notes: text }))
+              }
+              defaultValue={pattern.notes}
               multiline
               maxLength={500}
             />
@@ -127,12 +133,18 @@ const WipScreen = () => {
           {/* STOPWATCH */}
           <View style={styles.subContainer}>
             <Stopwatch
-              startTime={stopwatchStart}
-              setStartTime={setStopwatchStart}
-              active={stopwatchActive}
-              setActive={setStopwatchActive}
-              offset={stopwatchOffset}
-              setOffset={setStopwatchOffset}
+              startTime={stopwatch.start}
+              setStartTime={(s) =>
+                setStopwatch((prev) => ({ ...prev, start: s }))
+              }
+              active={stopwatch.active}
+              setActive={(a) =>
+                setStopwatch((prev) => ({ ...prev, active: a }))
+              }
+              offset={stopwatch.offset}
+              setOffset={(o) =>
+                setStopwatch((prev) => ({ ...prev, offset: o }))
+              }
             />
           </View>
         </View>

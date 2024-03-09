@@ -6,8 +6,9 @@ import Button from 'components/buttons/Button';
 import CreateItem from 'screens/ListScreen/CreateItem';
 // Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import storageKeys from '_constants/storageKeys';
 // Translation
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 // Styling
 import { useTheme } from '@react-navigation/native';
 import getStyles from './styles';
@@ -27,7 +28,7 @@ const ListScreen = () => {
   useEffect(() => {
     const loadItems = async () => {
       try {
-        const savedItems = await AsyncStorage.getItem('shopping_items');
+        const savedItems = await AsyncStorage.getItem(storageKeys.APP.SHOPPING);
         setItems(savedItems ? JSON.parse(savedItems) : []);
       } catch (error) {
         console.error('🚩 Error loading shopping list items:', error);
@@ -41,7 +42,7 @@ const ListScreen = () => {
     const saveItems = async () => {
       try {
         const stringifiedItems = JSON.stringify(items);
-        await AsyncStorage.setItem('shopping_items', stringifiedItems);
+        await AsyncStorage.setItem(storageKeys.APP.SHOPPING, stringifiedItems);
       } catch (error) {
         console.error('🚩 Error saving shopping list items');
       }

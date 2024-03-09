@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+// Storage
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import storageKeys from '_constants/storageKeys';
 // Theme
 import { useColorScheme } from 'react-native';
 import { KHDarkTheme, KHLightTheme } from '_constants/theme';
@@ -14,19 +16,21 @@ const AppContextProvider = ({ children }) => {
     scheme === 'dark' ? KHDarkTheme : KHLightTheme
   );
 
-  // Load saved scheme from storage
+  // Load saved theme from storage
   useEffect(() => {
-    const getScheme = async () => {
+    const getTheme = async () => {
       try {
-        const savedScheme = await AsyncStorage.getItem('scheme');
-        if (savedScheme) {
-          setTheme(savedScheme === 'dark' ? KHDarkTheme : KHLightTheme);
+        const savedTheme = await AsyncStorage.getItem(
+          storageKeys.SETTINGS.THEME
+        );
+        if (savedTheme) {
+          setTheme(savedTheme === 'dark' ? KHDarkTheme : KHLightTheme);
         }
       } catch (error) {
-        console.error('🚩 Error loading scheme');
+        console.error('🚩 Error loading theme');
       }
     };
-    getScheme();
+    getTheme();
   }, []);
 
   return (
