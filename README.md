@@ -9,10 +9,11 @@ A mobile app to help you keep track of your knitting and crocheting projects, bo
     - [ ] Tabs for different projects
 
 ## To-Do
+- [ ] Use React Native Paper more
 - [x] Linting
 - [x] Documentation
 - [x] Screen transitions
-- [ ] Organize storage labelling
+- [x] Organize storage labelling
 - [ ] Accessibility 
 - [ ] Settings screen
 - [x] Fix item delete alert style
